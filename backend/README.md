@@ -50,7 +50,7 @@ mostrar os detalhes de uma bike
 # yarn add cors 
 # yarn add @types/cors 
 # yarn add prisma
-# yarn add @types/prisma/client
+# yarn add @prisma/client
 # npx prisma init
 # yarn prisma migrate dev : Comando para rodar uma migrate depois de criada
 # yarn add bcryptjs
@@ -61,8 +61,3 @@ mostrar os detalhes de uma bike
 # yarn add @types/dotenv
 # yarn add multer
 # yarn add @types/multer -D
-# 
-#
-#
-#
-#
