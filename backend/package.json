@@ -1,0 +1,9 @@
+{
+  "name": "bicicletaria",
+  "version": "1.0",
+  "description": "Spare Parts Inventory",
+  "main": "index.js",
+  "repository": "git@github.com:genilson-dev/gerenciamento-bike.git",
+  "author": "Genilson Monteiro da Silva",
+  "license": "MIT"
+}
