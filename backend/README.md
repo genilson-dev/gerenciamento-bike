@@ -42,3 +42,27 @@ mostrar os detalhes de uma bike
 # Inicializar o projeto com o comando:
 # yarn init -y : Para inicializar o projeto
 # yarn tsc --init : Para inicializar o typescript
+# yarn add typescript -D
+# yarn add express 
+# yarn add @types/express -D
+# yarn add ts-node-dev -D
+# yarn add express-async-errors
+# yarn add cors 
+# yarn add @types/cors 
+# yarn add prisma
+# yarn add @types/prisma/client
+# npx prisma init
+# yarn prisma migrate dev : Comando para rodar uma migrate depois de criada
+# yarn add bcryptjs
+# yarn add @types/bcryptjs -D
+# yarn add jsonwebtoken
+# yarn add @types/jsonwebtoken
+# yarn add dotenv
+# yarn add @types/dotenv
+# yarn add multer
+# yarn add @types/multer -D
+# 
+#
+#
+#
+#
