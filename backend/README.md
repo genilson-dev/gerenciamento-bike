@@ -2,7 +2,7 @@
 [x] - Instalar todas as dependencias do projeto
 [x] - Inicializar o projeto com o typescript
 [x] - Criaro sistema de paginação do projeto
-[] -  Cadastrar um novo usuario
+[x] -  Cadastrar um novo usuario
 [] -  editar um usuario
 [] -  excluir um usuario
 [] -  consultar um usuario
