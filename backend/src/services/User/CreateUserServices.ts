@@ -23,6 +23,11 @@ class CreateUserServices {
                 email,
                 password: passwordHash,
             },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+            },
         });
 
         return user;

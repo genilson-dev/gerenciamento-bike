@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import { CreateUserController } from '../controllers/User/CreateUserControllers';
+import { ListUsersControllers } from '../controllers/User/ListUsersControllers';
 
 
 const router = Router();
@@ -12,6 +13,8 @@ router.get('/teste', (req, res) => {
     })
 })
 
-router.post('/users', new CreateUserController().handle)
+// Requisição para criar um usuário
+router.post('/users', new CreateUserController().handle);
+router.get('/users', new ListUsersControllers().handle);
 
 export {router};
