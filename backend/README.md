@@ -1,7 +1,7 @@
 # TopLister
 [x] - Instalar todas as dependencias do projeto
 [x] - Inicializar o projeto com o typescript
-[] - Criaro sistema de paginação do projeto
+[x] - Criaro sistema de paginação do projeto
 [] -  Cadastrar um novo usuario
 [] -  editar um usuario
 [] -  excluir um usuario
