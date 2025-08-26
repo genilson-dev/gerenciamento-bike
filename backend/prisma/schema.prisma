@@ -9,7 +9,7 @@ datasource db {
 
 // Usuário do sistema (admin, funcionário, etc.)
 model User {
-  id        Int      @id @default(autoincrement()) // Chave primária
+  id        String   @id @default(uuid()) // Chave primária
   name      String   // Nome do usuário
   email     String   @unique // Email único
   password  String   // Senha criptografada
@@ -20,7 +20,7 @@ model User {
 
 // Categoria de produtos (ex: peças, acessórios)
 model Category {
-  id       Int      @id @default(autoincrement()) // Chave primária
+  id        String   @id @default(uuid()) // Chave primária
   name     String   @unique // Nome único da categoria
   products Product[] // Relação: categoria pode ter vários produtos
   @@map("categories")
@@ -28,28 +28,26 @@ model Category {
 
 // Produto vendido ou utilizado em ordens
 model Product {
-  id         Int      @id @default(autoincrement()) // Chave primária
+ id        String   @id @default(uuid()) // Chave primária
   name       String   // Nome do produto
   price      Float    // Preço do produto
-  categoryId Int      // Chave estrangeira para categoria
+  categoryId String   // Chave estrangeira para categoria
   category   Category @relation(fields: [categoryId], references: [id]) // Relação com categoria
   orders     OrderItem[] // Relação: produto pode estar em vários itens de ordem
   @@map("products")
 }
-
 // Bike cadastrada no sistema
 model Bike {
-  id        Int      @id @default(autoincrement()) // Chave primária
+  id        String   @id @default(uuid()) // Chave primária
   model     String   // Modelo da bike
-  ownerId   Int      // Chave estrangeira para cliente
+  ownerId   String   // Chave estrangeira para cliente
   owner     Client   @relation(fields: [ownerId], references: [id]) // Relação com cliente (dono)
   orders    Order[]  // Relação: bike pode estar em várias ordens
   @@map("bikes")
 }
-
 // Cliente do sistema
 model Client {
-  id        Int      @id @default(autoincrement()) // Chave primária
+  id        String   @id @default(uuid()) // Chave primária
   name      String   // Nome do cliente
   email     String   @unique // Email único do cliente
   bikes     Bike[]   // Relação: cliente pode ter várias bikes
@@ -59,15 +57,15 @@ model Client {
 
 // Ordem de serviço (serviços realizados, status, etc.)
 model Order {
-  id         Int        @id @default(autoincrement()) // Chave primária
+  id        String   @id @default(uuid()) // Chave primária
   status     String     // Status da ordem (aberto, encerrado, draft, etc.)
   createdAt  DateTime   @default(now()) // Data de criação
   updatedAt  DateTime   @updatedAt      // Data de atualização
-  clientId   Int        // Chave estrangeira para cliente
+  clientId   String     // Chave estrangeira para cliente
   client     Client     @relation(fields: [clientId], references: [id]) // Relação com cliente
-  userId     Int        // Chave estrangeira para usuário
+  userId     String     // Chave estrangeira para usuário
   user       User       @relation(fields: [userId], references: [id]) // Relação com usuário
-  bikeId     Int        // Chave estrangeira para bike
+  bikeId     String     // Chave estrangeira para bike
   bike       Bike       @relation(fields: [bikeId], references: [id]) // Relação com bike
   items      OrderItem[] // Relação: ordem pode ter vários itens
   @@map("orders")
@@ -75,10 +73,10 @@ model Order {
 
 // Item de uma ordem (produto, quantidade, etc.)
 model OrderItem {
-  id        Int      @id @default(autoincrement()) // Chave primária
-  orderId   Int      // Chave estrangeira para ordem
+  id        String   @id @default(uuid()) // Chave primária
+  orderId   String   // Chave estrangeira para ordem
   order     Order    @relation(fields: [orderId], references: [id]) // Relação com ordem
-  productId Int      // Chave estrangeira para produto
+  productId String   // Chave estrangeira para produto
   product   Product  @relation(fields: [productId], references: [id]) // Relação com produto
   quantity  Int      // Quantidade do produto na ordem
   @@map("order_items")
