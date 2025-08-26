@@ -5,7 +5,7 @@ class UpDateUserService {
     async execute({ user_id, name, email, password }: OrderRequest) {
         const user = await prismaDB.user.update({
             where: {
-                id: parseInt(user_id)
+                id: user_id
             },
             data: {
                 name,
