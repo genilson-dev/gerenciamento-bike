@@ -13,7 +13,8 @@ model User {
   name      String   // Nome do usuário
   email     String   @unique // Email único
   password  String   // Senha criptografada
-  createdAt DateTime @default(now()) // Data de criação
+  created_at DateTime @default(now()) // Data de criação
+  update_at DateTime @default(now()) // Data de alteração
   orders    Order[]  // Relação: usuário pode ter várias ordens
   @@map("users")
 }
@@ -23,6 +24,8 @@ model Category {
   id        String   @id @default(uuid()) // Chave primária
   name     String   @unique // Nome único da categoria
   products Product[] // Relação: categoria pode ter vários produtos
+  created_at DateTime @default(now()) // Data de criação
+  update_at DateTime @default(now()) // Data de alteração
   @@map("categories")
 }
 
@@ -32,6 +35,8 @@ model Product {
   name       String   // Nome do produto
   price      Float    // Preço do produto
   categoryId String   // Chave estrangeira para categoria
+  created_at DateTime @default(now()) // Data de criação
+  update_at DateTime @default(now()) // Data de alteração
   category   Category @relation(fields: [categoryId], references: [id]) // Relação com categoria
   orders     OrderItem[] // Relação: produto pode estar em vários itens de ordem
   @@map("products")
@@ -41,6 +46,8 @@ model Bike {
   id        String   @id @default(uuid()) // Chave primária
   model     String   // Modelo da bike
   ownerId   String   // Chave estrangeira para cliente
+  created_at DateTime @default(now()) // Data de criação
+  update_at DateTime @default(now()) // Data de alteração
   owner     Client   @relation(fields: [ownerId], references: [id]) // Relação com cliente (dono)
   orders    Order[]  // Relação: bike pode estar em várias ordens
   @@map("bikes")
@@ -50,6 +57,8 @@ model Client {
   id        String   @id @default(uuid()) // Chave primária
   name      String   // Nome do cliente
   email     String   @unique // Email único do cliente
+  created_at DateTime @default(now()) // Data de criação
+  update_at DateTime @default(now()) // Data de alteração
   bikes     Bike[]   // Relação: cliente pode ter várias bikes
   orders    Order[]  // Relação: cliente pode ter várias ordens
   @@map("clients")
@@ -59,8 +68,8 @@ model Client {
 model Order {
   id        String   @id @default(uuid()) // Chave primária
   status     String     // Status da ordem (aberto, encerrado, draft, etc.)
-  createdAt  DateTime   @default(now()) // Data de criação
-  updatedAt  DateTime   @updatedAt      // Data de atualização
+  created_at DateTime @default(now()) // Data de criação
+  update_at DateTime @default(now()) // Data de alteração
   clientId   String     // Chave estrangeira para cliente
   client     Client     @relation(fields: [clientId], references: [id]) // Relação com cliente
   userId     String     // Chave estrangeira para usuário
@@ -75,6 +84,8 @@ model Order {
 model OrderItem {
   id        String   @id @default(uuid()) // Chave primária
   orderId   String   // Chave estrangeira para ordem
+  created_at DateTime @default(now()) // Data de criação
+  update_at DateTime @default(now()) // Data de alteração
   order     Order    @relation(fields: [orderId], references: [id]) // Relação com ordem
   productId String   // Chave estrangeira para produto
   product   Product  @relation(fields: [productId], references: [id]) // Relação com produto

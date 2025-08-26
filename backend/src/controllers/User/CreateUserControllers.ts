@@ -6,7 +6,9 @@ class CreateUserController {
 
         const createUserService = new CreateUserServices();
 
+        // 'user' não existe na tipagem padrão do Request, mas é adicionado via middleware de autenticação
         const user = await createUserService.execute({
+            user_id: (req as any).user?.id, // Adiciona o user_id conforme requerido pelo tipo UserRequest
             name,
             email,
             password,

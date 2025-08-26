@@ -16,7 +16,8 @@ class UpDateUserService {
                 name: true,
                 email: true,
                 password: false,
-                createdAt: true,
+                created_at: true,
+                update_at: true
             }
         });
         return user;

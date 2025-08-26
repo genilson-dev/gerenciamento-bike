@@ -27,6 +27,8 @@ class CreateUserServices {
                 id: true,
                 name: true,
                 email: true,
+                created_at: true,
+                update_at: true
             },
         });
 
