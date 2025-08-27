@@ -3,6 +3,7 @@ import { CreateUserController } from '../controllers/User/CreateUserControllers'
 import { ListUsersControllers } from '../controllers/User/ListUsersControllers';
 import { UpDateUserController } from '../controllers/User/UpDateUserControllers';
 import { DeleUserController } from '../controllers/User/DeleteUserController';
+import { LoginUserController } from '../controllers/User/AuthUserLogin';
 
 
 const router = Router();
@@ -20,5 +21,6 @@ router.post('/users', new CreateUserController().handle);
 router.get('/users', new ListUsersControllers().handle);
 router.put('/users', new UpDateUserController().handle)
 router.delete("/user", new DeleUserController().handle)
+router.post('/login', new LoginUserController().handleLogin)
 
 export {router};
