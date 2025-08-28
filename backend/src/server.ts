@@ -1,3 +1,6 @@
+import 'dotenv/config';
+import { config } from 'dotenv';
+config({ path: './config.env' });
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import 'express-async-errors';

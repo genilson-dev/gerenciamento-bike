@@ -1,8 +1,13 @@
 import { prismaDB } from "../../prisma";
-import { OrderRequest } from "../../interfaces/OrderRequest";
+import { UserRequest } from "../../interfaces/UserRequest";
 
 class UpDateUserService {
-    async execute({ user_id, name, email, password }: OrderRequest) {
+    async execute({ user_id, name, email, password }: UserRequest) {
+        // Validação para garantir que user_id não seja undefined
+        if (!user_id) {
+            throw new Error("ID do usuário é obrigatório");
+        }
+
         const user = await prismaDB.user.update({
             where: {
                 id: user_id

@@ -4,7 +4,7 @@ import { ListUsersControllers } from '../controllers/User/ListUsersControllers';
 import { UpDateUserController } from '../controllers/User/UpDateUserControllers';
 import { DeleUserController } from '../controllers/User/DeleteUserController';
 import { LoginUserController } from '../controllers/User/AuthUserLogin';
-
+import { isAuthenticated } from '../middlewares/IsAuthenticated';
 
 const router = Router();
 
@@ -18,9 +18,9 @@ router.get('/teste', (req, res) => {
 
 // Requisição para criar um usuário
 router.post('/users', new CreateUserController().handle);
-router.get('/users', new ListUsersControllers().handle);
-router.put('/users', new UpDateUserController().handle)
-router.delete("/user", new DeleUserController().handle)
+router.get('/users',isAuthenticated, new ListUsersControllers().handle);
+router.put('/users/:user_id',isAuthenticated, new UpDateUserController().handle)
+router.delete("/users/:user_id",isAuthenticated, new DeleUserController().handle)
 router.post('/login', new LoginUserController().handleLogin)
 
 export {router};
