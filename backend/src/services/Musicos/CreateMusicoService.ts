@@ -7,23 +7,18 @@ class CreateMusicoService {
     async execute({
         name,
         sexo,
-        status_aluno,
-        status_ensaios,
-        status_rjm,
-        status_cultos_oficiais,
-        status_oficializado,
-        organista,
-        organista_aluna,
-        organista_rjm,
-        organista_cultos_oficiais,
-        organista_oficializada,
-        possui_instrumento_proprio,
-        instrumento,
-        tonalidade,
         encarregado_local,
         encarregado_regional,
         instrutor,
-        examinadora
+        examinadora,
+        aluno,
+        ensaios,
+        rjm,
+        cultos_oficiais,
+        oficializado,
+        possui_instrumento_proprio,
+        instrumento,
+        tonalidade
     }: MusicoRequest) {
         
         // Verificar se já existe um músico com o mesmo nome
@@ -42,23 +37,18 @@ class CreateMusicoService {
             data: {
                 name,
                 sexo,
-                status_aluno,
-                status_ensaios,
-                status_rjm,
-                status_cultos_oficiais,
-                status_oficializado,
-                organista,
-                organista_aluna,
-                organista_rjm,
-                organista_cultos_oficiais,
-                organista_oficializada,
-                possui_instrumento_proprio,
-                instrumento,
-                tonalidade,
                 encarregado_local,
                 encarregado_regional,
                 instrutor,
-                examinadora
+                examinadora,
+                aluno,
+                ensaios,
+                rjm,
+                cultos_oficiais,
+                oficializado,
+                possui_instrumento_proprio,
+                instrumento: instrumento ?? "",
+                tonalidade: tonalidade ?? ""
             }
         });
 

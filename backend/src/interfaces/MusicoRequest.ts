@@ -1,21 +1,16 @@
 export interface MusicoRequest {
     name: string;
     sexo: string;
-    status_aluno?: string;
-    status_ensaios?: string;
-    status_rjm?: string;
-    status_cultos_oficiais?: string;
-    status_oficializado?: string;
-    organista?: string;
-    organista_aluna?: string;
-    organista_rjm?: string;
-    organista_cultos_oficiais?: string;
-    organista_oficializada?: string;
-    possui_instrumento_proprio?: string;
-    instrumento?: string,
+    encarregado_local: boolean;
+    encarregado_regional: boolean;
+    instrutor: boolean;
+    examinadora: boolean;
+    aluno: boolean;
+    ensaios: boolean;
+    rjm: boolean;
+    cultos_oficiais: boolean;
+    oficializado: boolean;
+    possui_instrumento_proprio: boolean;
+    instrumento: boolean;
     tonalidade?: string;
-    encarregado_local?: string;
-    encarregado_regional?: string;
-    instrutor?: string;
-    examinadora?: string;
 }

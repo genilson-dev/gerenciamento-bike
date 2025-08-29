@@ -34,11 +34,11 @@ model Category {
 model Product {
  id        String   @id @default(uuid()) // Chave primária
   name       String   // Nome do produto
-  price      Float    // Preço do produto
-  categoryId String   // Chave estrangeira para categoria
+  price      String    // Preço do produto
+  category_id String   // Chave estrangeira para categoria
   created_at DateTime @default(now()) // Data de criação
   update_at DateTime @default(now()) // Data de alteração
-  category   Category @relation(fields: [categoryId], references: [id]) // Relação com categoria
+  category   Category @relation(fields: [category_id], references: [id]) // Relação com categoria
   orders     OrderItem[] // Relação: produto pode estar em vários itens de ordem
   @@map("products")
 }
@@ -46,10 +46,10 @@ model Product {
 model Bike {
   id        String   @id @default(uuid()) // Chave primária
   model     String   // Modelo da bike
-  ownerId   String   // Chave estrangeira para cliente
+  owner_id   String   // Chave estrangeira para cliente
   created_at DateTime @default(now()) // Data de criação
   update_at DateTime @default(now()) // Data de alteração
-  owner     Client   @relation(fields: [ownerId], references: [id]) // Relação com cliente (dono)
+  owner     Client   @relation(fields: [owner_id], references: [id]) // Relação com cliente (dono)
   orders    Order[]  // Relação: bike pode estar em várias ordens
   @@map("bikes")
 }
@@ -71,12 +71,12 @@ model Order {
   status     String     // Status da ordem (aberto, encerrado, draft, etc.)
   created_at DateTime @default(now()) // Data de criação
   update_at DateTime @default(now()) // Data de alteração
-  clientId   String     // Chave estrangeira para cliente
-  client     Client     @relation(fields: [clientId], references: [id]) // Relação com cliente
-  userId     String     // Chave estrangeira para usuário
-  user       User       @relation(fields: [userId], references: [id]) // Relação com usuário
-  bikeId     String     // Chave estrangeira para bike
-  bike       Bike       @relation(fields: [bikeId], references: [id]) // Relação com bike
+  client_id   String     // Chave estrangeira para cliente
+  client     Client     @relation(fields: [client_id], references: [id]) // Relação com cliente
+  user_id     String     // Chave estrangeira para usuário
+  user       User       @relation(fields: [user_id], references: [id]) // Relação com usuário
+  bike_id     String     // Chave estrangeira para bike
+  bike       Bike       @relation(fields: [bike_id], references: [id]) // Relação com bike
   items      OrderItem[] // Relação: ordem pode ter vários itens
   @@map("orders")
 }
@@ -84,12 +84,12 @@ model Order {
 // Item de uma ordem (produto, quantidade, etc.)
 model OrderItem {
   id        String   @id @default(uuid()) // Chave primária
-  orderId   String   // Chave estrangeira para ordem
+  order_id   String   // Chave estrangeira para ordem
   created_at DateTime @default(now()) // Data de criação
   update_at DateTime @default(now()) // Data de alteração
-  order     Order    @relation(fields: [orderId], references: [id]) // Relação com ordem
-  productId String   // Chave estrangeira para produto
-  product   Product  @relation(fields: [productId], references: [id]) // Relação com produto
+  order     Order    @relation(fields: [order_id], references: [id]) // Relação com ordem
+  product_id String   // Chave estrangeira para produto
+  product   Product  @relation(fields: [product_id], references: [id]) // Relação com produto
   quantity  Int      // Quantidade do produto na ordem
   @@map("order_items")
 }
@@ -99,25 +99,42 @@ model Musico {
   id                    String   @id @default(uuid()) // Chave primária
   name                  String   // Nome do músico
   sexo                  String   // Sexo (M/F)
-  encarregado_local     String?  // Encarregado local (opcional)
-  encarregado_regional  String?  // Encarregado regional (opcional)
-  instrutor             String?  // Instrutor(a) (opcional)
-  examinadora           String?  // Examinadora (opcional)
-  status_aluno          String? // Se é aluno
-  status_ensaios        String? // Se participa dos ensaios
-  status_rjm            String? // Se participa das RJM
-  status_cultos_oficiais String? // Se participa dos cultos oficiais
-  status_oficializado   String? // Se é oficializado
-  organista             String? // Se é organista
-  organista_aluna       String? // Se é aluna organista
-  organista_rjm         String? // Se participa das RJM como organista
-  organista_cultos_oficiais String? // Se participa dos cultos oficiais como organista
-  organista_oficializada String? // Se é oficializada como organista
-  possui_instrumento_proprio String? // Se possui instrumento próprio
-  instrumento String? // Qual instrumento toca
-  tonalidade            String?  // Qual a tonalidade (opcional)
+  encarregado_local     Boolean  // Encarregado local (opcional)
+  encarregado_regional  Boolean  // Encarregado regional (opcional)
+  instrutor             Boolean  // Instrutor(a) (opcional)
+  examinadora           Boolean  // Examinadora (opcional)
+  aluno          Boolean // Se é aluno
+  ensaios        Boolean // Se participa dos ensaios
+  rjm            Boolean // Se participa das RJM
+  cultos_oficiais Boolean // Se participa dos cultos oficiais
+  oficializado   Boolean // Se é oficializado  
+  possui_instrumento_proprio Boolean // Se possui instrumento próprio
+  instrumento Boolean // Qual instrumento toca
+  tonalidade            String  // Qual a tonalidade (opcional)
   created_at            DateTime @default(now()) // Data de criação
   update_at             DateTime @updatedAt // Data de alteração
   
   @@map("musicos")
+}
+
+
+model Organista {
+  id                    String   @id @default(uuid()) // Chave primária
+  name                  String   // Nome do músico
+  sexo                  String   // Sexo (M/F)  
+  instrutora            Boolean  // Instrutor(a) (opcional)
+  examinadora           Boolean  // Examinadora (opcional)
+  status_rjm            Boolean // Se participa das RJM
+  oficializado   Boolean // Se é oficializado
+  aluna       Boolean // Se é aluna organista
+  rjm         Boolean // Se participa das RJM como organista
+  cultos_oficiais Boolean // Se participa dos cultos oficiais como organista
+  organista_oficializada Boolean // Se é oficializada como organista
+  possui_instrumento_proprio Boolean // Se possui instrumento próprio
+  instrumento Boolean // Qual instrumento toca
+  tonalidade            String?  // Qual a tonalidade (opcional)
+  created_at            DateTime @default(now()) // Data de criação
+  update_at             DateTime @updatedAt // Data de alteração
+  
+  @@map("organistas")
 }

@@ -7,23 +7,18 @@ class CreateMusicoController {
             const {
                 name,
                 sexo,
-                status_aluno,
-                status_ensaios,
-                status_rjm,
-                status_cultos_oficiais,
-                status_oficializado,
-                organista,
-                organista_aluna,
-                organista_rjm,
-                organista_cultos_oficiais,
-                organista_oficializada,
-                possui_instrumento_proprio,
-                instrumento,
-                tonalidade,
                 encarregado_local,
                 encarregado_regional,
                 instrutor,
-                examinadora
+                examinadora,
+                aluno,
+                ensaios,
+                rjm,
+                cultos_oficiais,
+                oficializado,
+                possui_instrumento_proprio,
+                instrumento,
+                tonalidade
             } = req.body;
 
             const createMusicoService = new CreateMusicoService();
@@ -31,23 +26,18 @@ class CreateMusicoController {
             const musico = await createMusicoService.execute({
                 name,
                 sexo,
-                status_aluno,
-                status_ensaios,
-                status_rjm,
-                status_cultos_oficiais,
-                status_oficializado,
-                organista,
-                organista_aluna,
-                organista_rjm,
-                organista_cultos_oficiais,
-                organista_oficializada,
-                possui_instrumento_proprio,
-                instrumento,
-                tonalidade,
                 encarregado_local,
                 encarregado_regional,
                 instrutor,
-                examinadora
+                examinadora,
+                aluno,
+                ensaios,
+                rjm,
+                cultos_oficiais,
+                oficializado,
+                possui_instrumento_proprio,
+                instrumento,
+                tonalidade
             });
 
             return res.status(201).json(musico);

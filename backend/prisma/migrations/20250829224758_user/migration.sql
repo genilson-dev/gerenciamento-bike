@@ -24,8 +24,8 @@ CREATE TABLE "public"."categories" (
 CREATE TABLE "public"."products" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "price" DOUBLE PRECISION NOT NULL,
-    "categoryId" TEXT NOT NULL,
+    "price" TEXT NOT NULL,
+    "category_id" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -36,7 +36,7 @@ CREATE TABLE "public"."products" (
 CREATE TABLE "public"."bikes" (
     "id" TEXT NOT NULL,
     "model" TEXT NOT NULL,
-    "ownerId" TEXT NOT NULL,
+    "owner_id" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -60,9 +60,9 @@ CREATE TABLE "public"."orders" (
     "status" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "clientId" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "bikeId" TEXT NOT NULL,
+    "client_id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "bike_id" TEXT NOT NULL,
 
     CONSTRAINT "orders_pkey" PRIMARY KEY ("id")
 );
@@ -70,10 +70,10 @@ CREATE TABLE "public"."orders" (
 -- CreateTable
 CREATE TABLE "public"."order_items" (
     "id" TEXT NOT NULL,
-    "orderId" TEXT NOT NULL,
+    "order_id" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "productId" TEXT NOT NULL,
+    "product_id" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
 
     CONSTRAINT "order_items_pkey" PRIMARY KEY ("id")
@@ -84,27 +84,44 @@ CREATE TABLE "public"."musicos" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "sexo" TEXT NOT NULL,
-    "encarregado_local" TEXT,
-    "encarregado_regional" TEXT,
-    "instrutor" TEXT,
-    "examinadora" TEXT,
-    "status_aluno" TEXT,
-    "status_ensaios" TEXT,
-    "status_rjm" TEXT,
-    "status_cultos_oficiais" TEXT,
-    "status_oficializado" TEXT,
-    "organista" TEXT,
-    "organista_aluna" TEXT,
-    "organista_rjm" TEXT,
-    "organista_cultos_oficiais" TEXT,
-    "organista_oficializada" TEXT,
-    "possui_instrumento_proprio" TEXT,
-    "instrumento" TEXT,
-    "tonalidade" TEXT,
+    "encarregado_local" BOOLEAN NOT NULL,
+    "encarregado_regional" BOOLEAN NOT NULL,
+    "instrutor" BOOLEAN NOT NULL,
+    "examinadora" BOOLEAN NOT NULL,
+    "aluno" BOOLEAN NOT NULL,
+    "ensaios" BOOLEAN NOT NULL,
+    "rjm" BOOLEAN NOT NULL,
+    "cultos_oficiais" BOOLEAN NOT NULL,
+    "oficializado" BOOLEAN NOT NULL,
+    "possui_instrumento_proprio" BOOLEAN NOT NULL,
+    "instrumento" BOOLEAN NOT NULL,
+    "tonalidade" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "update_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "musicos_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."organistas" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "sexo" TEXT NOT NULL,
+    "instrutora" BOOLEAN NOT NULL,
+    "examinadora" BOOLEAN NOT NULL,
+    "status_rjm" BOOLEAN NOT NULL,
+    "oficializado" BOOLEAN NOT NULL,
+    "aluna" BOOLEAN NOT NULL,
+    "rjm" BOOLEAN NOT NULL,
+    "cultos_oficiais" BOOLEAN NOT NULL,
+    "organista_oficializada" BOOLEAN NOT NULL,
+    "possui_instrumento_proprio" BOOLEAN NOT NULL,
+    "instrumento" BOOLEAN NOT NULL,
+    "tonalidade" TEXT,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "update_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "organistas_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -117,22 +134,22 @@ CREATE UNIQUE INDEX "categories_name_key" ON "public"."categories"("name");
 CREATE UNIQUE INDEX "clients_email_key" ON "public"."clients"("email");
 
 -- AddForeignKey
-ALTER TABLE "public"."products" ADD CONSTRAINT "products_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "public"."categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."products" ADD CONSTRAINT "products_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "public"."categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."bikes" ADD CONSTRAINT "bikes_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "public"."clients"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."bikes" ADD CONSTRAINT "bikes_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "public"."clients"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "public"."clients"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_client_id_fkey" FOREIGN KEY ("client_id") REFERENCES "public"."clients"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_bikeId_fkey" FOREIGN KEY ("bikeId") REFERENCES "public"."bikes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_bike_id_fkey" FOREIGN KEY ("bike_id") REFERENCES "public"."bikes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."order_items" ADD CONSTRAINT "order_items_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "public"."orders"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."order_items" ADD CONSTRAINT "order_items_order_id_fkey" FOREIGN KEY ("order_id") REFERENCES "public"."orders"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."order_items" ADD CONSTRAINT "order_items_productId_fkey" FOREIGN KEY ("productId") REFERENCES "public"."products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."order_items" ADD CONSTRAINT "order_items_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "public"."products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

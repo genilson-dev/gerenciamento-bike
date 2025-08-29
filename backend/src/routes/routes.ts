@@ -7,6 +7,7 @@ import { LoginUserController } from '../controllers/User/AuthUserLogin';
 import { CreateMusicoController } from '../controllers/Musicos/CreateMusicoController';
 import { ListMusicosController } from '../controllers/Musicos/ListMusicosController';
 import { isAuthenticated, withAuth } from '../middlewares/IsAuthenticated';
+import { CreateProductController } from '../controllers/produtos/CreateProductController';
 
 const router = Router();
 
@@ -28,5 +29,15 @@ router.post('/login', new LoginUserController().handleLogin);
 // Rotas para músicos
 router.post('/musicos', new CreateMusicoController().handle);
 router.get('/musicos', new ListMusicosController().handle);
+
+//Produtos
+router.get('/product', (req, res) => {
+    console.log('Esta funcionando a rota de teste');
+    return res.send({
+        message: 'Rota de produto funcionando!'
+    })
+})
+
+router.post("/product", isAuthenticated, withAuth(new CreateProductController().handleProduct))
 
 export {router};
