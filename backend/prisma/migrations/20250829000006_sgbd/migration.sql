@@ -4,7 +4,8 @@ CREATE TABLE "public"."users" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -13,6 +14,8 @@ CREATE TABLE "public"."users" (
 CREATE TABLE "public"."categories" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "categories_pkey" PRIMARY KEY ("id")
 );
@@ -23,6 +26,8 @@ CREATE TABLE "public"."products" (
     "name" TEXT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "categoryId" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "products_pkey" PRIMARY KEY ("id")
 );
@@ -32,6 +37,8 @@ CREATE TABLE "public"."bikes" (
     "id" TEXT NOT NULL,
     "model" TEXT NOT NULL,
     "ownerId" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "bikes_pkey" PRIMARY KEY ("id")
 );
@@ -41,6 +48,8 @@ CREATE TABLE "public"."clients" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "clients_pkey" PRIMARY KEY ("id")
 );
@@ -49,8 +58,8 @@ CREATE TABLE "public"."clients" (
 CREATE TABLE "public"."orders" (
     "id" TEXT NOT NULL,
     "status" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "clientId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "bikeId" TEXT NOT NULL,
@@ -62,10 +71,40 @@ CREATE TABLE "public"."orders" (
 CREATE TABLE "public"."order_items" (
     "id" TEXT NOT NULL,
     "orderId" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "productId" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
 
     CONSTRAINT "order_items_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."musicos" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "sexo" TEXT NOT NULL,
+    "encarregado_local" TEXT,
+    "encarregado_regional" TEXT,
+    "instrutor" TEXT,
+    "examinadora" TEXT,
+    "status_aluno" TEXT,
+    "status_ensaios" TEXT,
+    "status_rjm" TEXT,
+    "status_cultos_oficiais" TEXT,
+    "status_oficializado" TEXT,
+    "organista" TEXT,
+    "organista_aluna" TEXT,
+    "organista_rjm" TEXT,
+    "organista_cultos_oficiais" TEXT,
+    "organista_oficializada" TEXT,
+    "possui_instrumento_proprio" TEXT,
+    "instrumento" TEXT,
+    "tonalidade" TEXT,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "update_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "musicos_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

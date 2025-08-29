@@ -99,17 +99,22 @@ model Musico {
   id                    String   @id @default(uuid()) // Chave primária
   name                  String   // Nome do músico
   sexo                  String   // Sexo (M/F)
-  status_aluno          Boolean  @default(false) // Se é aluno
-  status_ensaios        Boolean  @default(false) // Se participa dos ensaios
-  status_rjm            Boolean  @default(false) // Se participa das RJM
-  status_cultos_oficiais Boolean @default(false) // Se participa dos cultos oficiais
-  status_oficializado   Boolean  @default(false) // Se é oficializado
-  organista             Boolean  @default(false) // Se é organista
-  organista_aluna       Boolean  @default(false) // Se é aluna organista
-  organista_rjm         Boolean  @default(false) // Se participa das RJM como organista
-  organista_cultos_oficiais Boolean @default(false) // Se participa dos cultos oficiais como organista
-  organista_oficializada Boolean @default(false) // Se é oficializada como organista
-  possui_instrumento_proprio Boolean @default(false) // Se possui instrumento próprio
+  encarregado_local     String?  // Encarregado local (opcional)
+  encarregado_regional  String?  // Encarregado regional (opcional)
+  instrutor             String?  // Instrutor(a) (opcional)
+  examinadora           String?  // Examinadora (opcional)
+  status_aluno          String? // Se é aluno
+  status_ensaios        String? // Se participa dos ensaios
+  status_rjm            String? // Se participa das RJM
+  status_cultos_oficiais String? // Se participa dos cultos oficiais
+  status_oficializado   String? // Se é oficializado
+  organista             String? // Se é organista
+  organista_aluna       String? // Se é aluna organista
+  organista_rjm         String? // Se participa das RJM como organista
+  organista_cultos_oficiais String? // Se participa dos cultos oficiais como organista
+  organista_oficializada String? // Se é oficializada como organista
+  possui_instrumento_proprio String? // Se possui instrumento próprio
+  instrumento String? // Qual instrumento toca
   tonalidade            String?  // Qual a tonalidade (opcional)
   created_at            DateTime @default(now()) // Data de criação
   update_at             DateTime @updatedAt // Data de alteração

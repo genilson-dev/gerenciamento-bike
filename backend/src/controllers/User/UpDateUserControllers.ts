@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { UpDateUserService } from "../../services/User/UpDateUserService";
+import { AuthenticatedRequest } from "../../middlewares/IsAuthenticated";
 
 class UpDateUserController{
-    async handle(req: Request, res: Response){
+    async handle(req: AuthenticatedRequest, res: Response){
         const { user_id, name, email, password } = req.body;
         const userService = new UpDateUserService();
         try {

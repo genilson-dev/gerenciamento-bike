@@ -1,0 +1,77 @@
+### Teste da rota de criação de músicos
+POST http://localhost:3001/musicos
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "sexo": "M",
+  "status_aluno": "Sim",
+  "status_ensaios": "Sim",
+  "status_rjm": "Não",
+  "status_cultos_oficiais": "Não",
+  "status_oficializado": "Não",
+  "organista": "Não",
+  "organista_aluna": "Não",
+  "organista_rjm": "Não",
+  "organista_cultos_oficiais": "Não",
+  "organista_oficializada": "Não",
+  "possui_instrumento_proprio": "Sim",
+  "tonalidade": "Dó",
+  "encarregado_local": "João Batista",
+  "encarregado_regional": "Pedro Santos",
+  "instrutor": "Maria Oliveira",
+  "examinadora": "Ana Costa"
+}
+
+### Teste da rota de listagem de músicos
+GET http://localhost:3001/musicos
+
+### Teste da rota de criação de músico organista
+POST http://localhost:3001/musicos
+Content-Type: application/json
+
+{
+  "name": "Maria Santos",
+  "sexo": "F",
+  "status_aluno": "Não",
+  "status_ensaios": "Sim",
+  "status_rjm": "Sim",
+  "status_cultos_oficiais": "Sim",
+  "status_oficializado": "Sim",
+  "organista": "Sim",
+  "organista_aluna": "Não",
+  "organista_rjm": "Sim",
+  "organista_cultos_oficiais": "Sim",
+  "organista_oficializada": "Sim",
+  "possui_instrumento_proprio": "Sim",
+  "tonalidade": "Fá",
+  "encarregado_local": "João Batista",
+  "encarregado_regional": "Pedro Santos",
+  "instrutor": "Carlos Silva",
+  "examinadora": "Ana Costa"
+}
+
+### Cadastrar Genilson Monteiro da Silva - Flautista Oficializado
+POST http://localhost:3001/musicos
+Content-Type: application/json
+
+{
+  "name": "Genilson Monteiro da Silva",
+  "sexo": "M",
+  "status_aluno": "Não",
+  "status_ensaios": "Sim",
+  "status_rjm": "Sim",
+  "status_cultos_oficiais": "Sim",
+  "status_oficializado": "Sim",
+  "organista": "Não",
+  "organista_aluna": "Não",
+  "organista_rjm": "Não",
+  "organista_cultos_oficiais": "Não",
+  "organista_oficializada": "Não",
+  "possui_instrumento_proprio": "Sim",
+  "tonalidade": "Dó",
+  "encarregado_local": "João Batista",
+  "encarregado_regional": "Pedro Santos",
+  "instrutor": "Carlos Silva",
+  "examinadora": "Ana Costa"
+}

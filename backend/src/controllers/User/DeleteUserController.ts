@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { DeleteUserService } from "../../services/User/DeleteUserService";
+import { AuthenticatedRequest } from "../../middlewares/IsAuthenticated";
 
 class DeleUserController{
-    async handle(req: Request, res: Response){
+    async handle(req: AuthenticatedRequest, res: Response){
         const { user_id } = req.params;
         
         // Validação para garantir que user_id não seja undefined
