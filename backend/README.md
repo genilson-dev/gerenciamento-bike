@@ -60,3 +60,46 @@ yarn generate
 - `src/middlewares/` - Middlewares (incluindo autenticação)
 - `src/routes/` - Definição das rotas
 - `prisma/` - Configuração e migrações do banco de dados
+
+# TopLister
+[x] - Instalar todas as dependencias do projeto
+[x] - Inicializar o projeto com o typescript
+[x] - Criaro sistema de paginação do projeto
+[x] -  Cadastrar um novo usuario
+[x] -  editar um usuario
+[x] -  excluir um usuario
+[x] -  consultar um usuario
+
+[x] -  logar um usuario
+[x] -  autenticar rotas privadas
+[x] -  mostrar os detalhes de um usuario logado
+[] -  listar todas as categorias
+
+[] -  criar uma ordem de servico
+[] -  consultar ordem
+[] -  adicionar itens a lista e poder retirar iten s dessa lista
+[] -  listar ordens em aberto 
+[] -  mostar detalhes dessa ordem
+[] -  listar ordens ja encerradas
+[] -  mostar detalhes dessa ordem
+[] -  rascunhos - draft
+[] -  finalizar uma ordem
+
+
+[] -  Cadastrar um novo cliente
+[] -  editar um cliente
+[] -  excluir um cliente
+[] -  consultar um cliente
+[] -  mostrar os detalhes de cliente
+
+[] -  Cadastrar um novo produto
+[] -  editar um produto
+[] -  excluir um produto
+[] -  consultar um produto
+[] -  mostrar os detalhes de produto
+
+[] -  Cadastrar uma nova bike
+[] -  editar uma bike
+[] -  excluir uma bike
+[] -  consultar uma bike
+[] -  mostrar os detalhes de uma bike
