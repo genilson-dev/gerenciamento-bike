@@ -8,6 +8,7 @@ import { CreateMusicoController } from '../controllers/Musicos/CreateMusicoContr
 import { ListMusicosController } from '../controllers/Musicos/ListMusicosController';
 import { isAuthenticated, withAuth } from '../middlewares/IsAuthenticated';
 import { CreateProductController } from '../controllers/produtos/CreateProductController';
+import { CreateCategoryController } from '../controllers/category/CreateCategoryControllers';
 
 const router = Router();
 
@@ -38,6 +39,10 @@ router.get('/product', (req, res) => {
     })
 })
 
+//Produtos
 router.post("/product", isAuthenticated, withAuth(new CreateProductController().handleProduct))
+
+//Categorias
+router.post("/category", isAuthenticated, withAuth(new CreateCategoryController().handle))
 
 export {router};
