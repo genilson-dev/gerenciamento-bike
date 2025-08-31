@@ -10,6 +10,7 @@ class CreateProductService{
                 category_id: category_id
             },
             select: {
+                id: true,
                 name: true,
                 price: true,
                 category_id: true,

@@ -9,6 +9,8 @@ import { ListMusicosController } from '../controllers/Musicos/ListMusicosControl
 import { isAuthenticated, withAuth } from '../middlewares/IsAuthenticated';
 import { CreateProductController } from '../controllers/produtos/CreateProductController';
 import { CreateCategoryController } from '../controllers/category/CreateCategoryControllers';
+import { AddItemController } from '../controllers/items/CreateItemController';
+import { RemoverOrderController } from '../controllers/order/RemoverOrderController';
 
 const router = Router();
 
@@ -45,4 +47,9 @@ router.post("/product", isAuthenticated, withAuth(new CreateProductController().
 //Categorias
 router.post("/category", isAuthenticated, withAuth(new CreateCategoryController().handle))
 
+//Items
+router.post("/items", isAuthenticated, withAuth(new AddItemController().handle))
+
+//Orders
+router.delete("/order", isAuthenticated, withAuth(new RemoverOrderController().handle))
 export {router};
