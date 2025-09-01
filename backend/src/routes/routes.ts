@@ -49,6 +49,7 @@ router.post("/category", isAuthenticated, withAuth(new CreateCategoryController(
 
 //Items
 router.post("/items", isAuthenticated, withAuth(new AddItemController().handle))
+router.delete("/item", isAuthenticated, withAuth(new RemoverOrderController().handle))
 
 //Orders
 router.delete("/order", isAuthenticated, withAuth(new RemoverOrderController().handle))
