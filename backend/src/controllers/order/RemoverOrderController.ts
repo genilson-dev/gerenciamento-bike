@@ -11,7 +11,7 @@ class RemoverOrderController{
             throw new Error("O parâmetro 'status' deve ser 'false'.");
         }
         const removerOrder = new RemoverOrderService();
-        const order = await removerOrder.execute({ order_id, status });
+        const order = await removerOrder.execute({ order_id, status: String(status) });
         return res.json(order);
 
     }
