@@ -11,6 +11,7 @@ import { CreateProductController } from '../controllers/produtos/CreateProductCo
 import { CreateCategoryController } from '../controllers/category/CreateCategoryControllers';
 import { AddItemController } from '../controllers/items/CreateItemController';
 import { RemoverOrderController } from '../controllers/order/RemoverOrderController';
+import { CreateOrderController } from '../controllers/order/CreateOrderController';
 
 const router = Router();
 
@@ -52,5 +53,6 @@ router.post("/items", isAuthenticated, withAuth(new AddItemController().handle))
 router.delete("/item", isAuthenticated, withAuth(new RemoverOrderController().handle))
 
 //Orders
+router.post("/order", isAuthenticated, withAuth(new CreateOrderController().handle))
 router.delete("/order", isAuthenticated, withAuth(new RemoverOrderController().handle))
 export {router};

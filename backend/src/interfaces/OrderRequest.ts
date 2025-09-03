@@ -1,4 +1,7 @@
 export interface OrderRequest {
-    status: false
-    order_id: string
+    status: string,
+    order_id: string,
+    client_id?: string,
+    user_id?: string, 
+    bike_id?: string
 }
