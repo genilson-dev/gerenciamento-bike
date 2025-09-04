@@ -1,5 +1,5 @@
 export interface BikeRequest {
-    name: string;
-    email: string;
+    model: string;
+    owner_id: string;
 }
 

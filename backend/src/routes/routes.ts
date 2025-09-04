@@ -13,6 +13,7 @@ import { AddItemController } from '../controllers/items/CreateItemController';
 import { RemoverOrderController } from '../controllers/order/RemoverOrderController';
 import { CreateOrderController } from '../controllers/order/CreateOrderController';
 import { CreateClientController } from '../controllers/client/CreateClientController';
+import { CreateBikeController } from '../controllers/Bikes/CretateBikeController';
 
 const router = Router();
 
@@ -59,4 +60,7 @@ router.post("/client", isAuthenticated, withAuth(new CreateClientController().ha
 //Orders
 router.post("/order", isAuthenticated, withAuth(new CreateOrderController().handle))
 router.delete("/order", isAuthenticated, withAuth(new RemoverOrderController().handle))
+
+//Bikes
+router.post("/bike", isAuthenticated, withAuth(new CreateBikeController().handle))
 export {router};
