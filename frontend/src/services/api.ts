@@ -98,10 +98,22 @@ export const orderService = {
   
   list: () => api.get('/orders'),
   
-  update: (id: string, orderData: { status: string }) =>
+  update: (id: string, orderData: { status: string; client_id?: string; bike_id?: string }) =>
     api.put(`/orders/${id}`, orderData),
   
   delete: (id: string) => api.delete(`/orders/${id}`),
+  
+  getTotal: (orderId: string) => api.get(`/orders/${orderId}/total`),
+  
+  finish: (orderId: string) => api.post(`/orders/${orderId}/finish`),
+};
+
+export const itemService = {
+  add: (itemData: { order_id: string; product_id: string; quantity: number }) =>
+    api.post('/items', itemData),
+  
+  remove: (productId: string) =>
+    api.delete(`/item?product_id=${productId}`),
 };
 
 export const musicoService = {
