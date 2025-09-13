@@ -12,4 +12,18 @@ class ListProductByCategory{
     }
 }
 
-export {ListProductByCategory}
+class ListAllProducts{
+    async execute(){
+        const products = await prismaDB.product.findMany({
+            include: {
+                category: true
+            },
+            orderBy: {
+                name: 'asc'
+            }
+        })
+        return products;
+    }
+}
+
+export {ListProductByCategory, ListAllProducts}
