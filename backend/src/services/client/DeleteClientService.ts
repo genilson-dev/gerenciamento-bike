@@ -29,3 +29,4 @@ class DeleteClientService {
 }
 
 export { DeleteClientService };
+

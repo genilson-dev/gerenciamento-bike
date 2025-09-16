@@ -27,3 +27,4 @@ class UpdateClientController {
 }
 
 export { UpdateClientController };
+

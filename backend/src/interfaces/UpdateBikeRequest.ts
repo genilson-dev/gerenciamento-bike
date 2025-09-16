@@ -3,3 +3,4 @@ export interface UpdateBikeRequest {
     model: string;
     owner_id: string;
 }
+

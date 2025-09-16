@@ -29,3 +29,4 @@ class UpdateBikeService {
 }
 
 export { UpdateBikeService };
+
