@@ -123,7 +123,6 @@ export const musicoService = {
   list: () => api.get('/musicos'),
   
   update: (id: string, musicoData: any) =>
-    api.put(`/musicos/${id}`, musicoData),
-  
+    api.put(`/musicos/${id}`, musicoData),  
   delete: (id: string) => api.delete(`/musicos/${id}`),
 };
