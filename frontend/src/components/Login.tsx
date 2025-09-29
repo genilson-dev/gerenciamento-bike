@@ -6,11 +6,13 @@ import { Bike, Lock, Eye, EyeOff } from 'lucide-react';
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isRegisterMode, setIsRegisterMode] = useState(false);
   
-  const { login } = useAuth();
+  const { login, register } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,13 +21,25 @@ const Login: React.FC = () => {
     setError('');
 
     try {
-      await login(email, password);
+      if (isRegisterMode) {
+        await register(name, email, password);
+      } else {
+        await login(email, password);
+      }
       navigate('/dashboard');
-    } catch (err) {
-      setError('Email ou senha incorretos');
+    } catch (err: any) {
+      setError(err.message || 'Erro ao processar solicitação');
     } finally {
       setLoading(false);
     }
+  };
+
+  const toggleMode = () => {
+    setIsRegisterMode(!isRegisterMode);
+    setError('');
+    setEmail('');
+    setPassword('');
+    setName('');
   };
 
   return (
@@ -36,7 +50,7 @@ const Login: React.FC = () => {
             <Bike className="h-6 w-6 text-primary-600" />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Entre na sua conta
+            {isRegisterMode ? 'Criar nova conta' : 'Entre na sua conta'}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Sistema de Gerenciamento de Bikes
@@ -51,6 +65,27 @@ const Login: React.FC = () => {
           )}
           
           <div className="space-y-4">
+            {isRegisterMode && (
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  Nome completo
+                </label>
+                <div className="mt-1 relative">
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
+                    placeholder="Seu nome completo"
+                  />
+                </div>
+              </div>
+            )}
+            
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email
@@ -112,12 +147,35 @@ const Login: React.FC = () => {
               ) : (
                 <>
                   <Lock className="h-4 w-4 mr-2" />
-                  Entrar
+                  {isRegisterMode ? 'Criar conta' : 'Entrar'}
                 </>
               )}
             </button>
           </div>
         </form>
+        
+        <div className="mt-6">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-gray-50 text-gray-500">
+                {isRegisterMode ? 'Já tem uma conta?' : 'Não tem uma conta?'}
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <button
+              type="button"
+              onClick={toggleMode}
+              className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            >
+              {isRegisterMode ? 'Fazer login' : 'Criar nova conta'}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

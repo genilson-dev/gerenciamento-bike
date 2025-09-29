@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { 
   Bike, 
@@ -8,17 +8,42 @@ import {
   Music, 
   Settings,
   LogOut,
-  Plus
+  Plus,
+  Tag,
+  X
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { categoryService } from '../services/api';
 
 const Dashboard: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  
+  const [showCategoryForm, setShowCategoryForm] = useState(false);
+  const [categoryName, setCategoryName] = useState('');
+  const [categoryLoading, setCategoryLoading] = useState(false);
+  const [categoryError, setCategoryError] = useState('');
 
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+
+  const handleCategorySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCategoryLoading(true);
+    setCategoryError('');
+
+    try {
+      await categoryService.create({ name: categoryName });
+      setShowCategoryForm(false);
+      setCategoryName('');
+      setCategoryError('');
+    } catch (err: any) {
+      setCategoryError(err.message || 'Erro ao criar categoria');
+    } finally {
+      setCategoryLoading(false);
+    }
   };
 
   const menuItems = [
@@ -111,7 +136,7 @@ const Dashboard: React.FC = () => {
             <h3 className="text-lg font-medium text-gray-900 mb-4">
               Ações Rápidas
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               <button
                 onClick={() => navigate('/clients/new')}
                 className="flex items-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
@@ -148,6 +173,15 @@ const Dashboard: React.FC = () => {
                   Novo Produto
                 </span>
               </button>
+              <button
+                onClick={() => setShowCategoryForm(true)}
+                className="flex items-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
+              >
+                <Tag className="h-5 w-5 text-primary-600 mr-3" />
+                <span className="text-sm font-medium text-gray-900">
+                  Nova Categoria
+                </span>
+              </button>
             </div>
           </div>
 
@@ -180,6 +214,75 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </main>
+
+      {/* Category Form Modal */}
+      {showCategoryForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold text-gray-900">Nova Categoria</h2>
+              <button
+                onClick={() => {
+                  setShowCategoryForm(false);
+                  setCategoryName('');
+                  setCategoryError('');
+                }}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            <form onSubmit={handleCategorySubmit}>
+              {categoryError && (
+                <div className="mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md">
+                  {categoryError}
+                </div>
+              )}
+              
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Nome da Categoria
+                </label>
+                <input
+                  type="text"
+                  value={categoryName}
+                  onChange={(e) => setCategoryName(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                  placeholder="Ex: Pneus, Freios, Suspensão"
+                  required
+                />
+              </div>
+              
+              <div className="flex justify-end space-x-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowCategoryForm(false);
+                    setCategoryName('');
+                    setCategoryError('');
+                  }}
+                  className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={categoryLoading}
+                  className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                >
+                  {categoryLoading ? (
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  ) : (
+                    <Tag className="h-4 w-4 mr-2" />
+                  )}
+                  {categoryLoading ? 'Criando...' : 'Criar Categoria'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

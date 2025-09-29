@@ -52,6 +52,34 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const register = async (name: string, email: string, password: string) => {
+    try {
+      const response = await api.post('/users', { name, email, password });
+      const { token, id, name: userName, email: userEmail } = response.data;
+      
+      const userData = {
+        id,
+        name: userName,
+        email: userEmail,
+        created_at: new Date().toISOString(),
+        update_at: new Date().toISOString()
+      };
+      
+      localStorage.setItem('token', token);
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setUser(userData);
+    } catch (error: any) {
+      console.error('Erro no registro:', error);
+      if (error.response?.data?.error) {
+        throw new Error(error.response.data.error);
+      } else if (error.message) {
+        throw new Error(error.message);
+      } else {
+        throw new Error('Erro ao conectar com o servidor. Verifique se o backend está rodando.');
+      }
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     delete api.defaults.headers.common['Authorization'];
@@ -61,6 +89,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const value: AuthContextType = {
     user,
     login,
+    register,
     logout,
     isAuthenticated: !!user,
   };
